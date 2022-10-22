@@ -83,12 +83,13 @@ namespace Update_Handler
         {
             if (Directory.Exists(downloadedPath))
                 Directory.Delete(downloadedPath, true);
+
             ZipFile.ExtractToDirectory(parentDirectory + "\\Launcher.zip", downloadedPath);
 
             if (File.Exists(parentDirectory + "\\Launcher.zip"))
                 File.Delete(parentDirectory + "\\Launcher.zip");
 
-            Process.Start(downloadedPath + "\\Launcher\\Launcher.exe");
+            Process.Start(downloadedPath + "\\Launcher.exe");
             var data = await GetLatestVersionData();
             VersionData = new VersionData { GameVersion = VersionData.GameVersion, LauncherVersion = data.LauncherVersion, LauncherPath = VersionData.LauncherPath };
             downloadCompleted = true;
